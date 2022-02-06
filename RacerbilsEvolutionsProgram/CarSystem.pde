@@ -14,7 +14,10 @@ class CarSystem {
   void updateAndDisplay() {
     //1.) Opdaterer sensorer og bilpositioner
     for (CarController controller : CarControllerList) {
+      int i = CarControllerList.size();
       controller.update();
+      if(i != CarControllerList.size())
+        break;
     }
 
     //2.) Tegner tilsidst - så sensorer kun ser banen og ikke andre biler!

@@ -1,5 +1,7 @@
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
-int       populationSize  = 100;     
+int       populationSize  = 100;    
+float[]   bedstweights = {0,0,0,0,0,0,0,0};
+float       generation = 1;
 
 //CarSystem: Indholder en population af "controllere" 
 CarSystem carSystem       = new CarSystem(populationSize);
@@ -13,9 +15,7 @@ void setup() {
 }
 
 void draw() {
-  clear();
-  fill(255);
-  rect(0,50,1000,1000);
+  background(255);
   image(trackImage,0,80);  
 
   carSystem.updateAndDisplay();
@@ -31,4 +31,11 @@ void draw() {
       }
     }*/
     //
+}
+
+void nextGen(){
+  generation*=1.1;
+  
+  carSystem = new CarSystem(populationSize);
+  
 }

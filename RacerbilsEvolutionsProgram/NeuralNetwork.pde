@@ -15,10 +15,10 @@ class NeuralNetwork {
   
   NeuralNetwork(float varians){
     for(int i=0; i < weights.length -1; i++){
-      weights[i] = random(-varians,varians);
+      weights[i] = bedstweights[i]+random(-varians,varians);
     }
     for(int i=0; i < biases.length -1; i++){
-      biases[i] = random(-varians,varians);
+      biases[i] = bedstweights[i]+random(-varians,varians);
     }    
   }
 

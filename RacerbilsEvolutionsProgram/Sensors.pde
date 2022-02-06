@@ -1,6 +1,8 @@
 class SensorSystem {
   //SensorSystem - alle bilens sensorer - ogå dem der ikke bruges af "hjernen"
   
+  boolean labCompleated = false;
+  
   //wall detectors
   float sensorMag = 50;
   float sensorAngle = PI*2/8;
@@ -25,7 +27,7 @@ class SensorSystem {
 
   //lapTime calculation
   boolean lastGreenDetection;
-  int     lastTimeInFrames      = 0;
+  int     lastTimeInFrames   = 0;
   int     lapTimeInFrames       = 10000;
 
   void displaySensors() {
@@ -70,9 +72,10 @@ class SensorSystem {
     if (red(color_car_position)==0 && blue(color_car_position)==0 && green(color_car_position)!=0) {//den grønne målstreg er detekteret
       currentGreenDetection = true;
     }
-    if (lastGreenDetection && !currentGreenDetection) {  //sidst grønt - nu ikke -vi har passeret målstregen 
+    if (lastGreenDetection && !currentGreenDetection && clockWiseRotationFrameCounter >100) {  //sidst grønt - nu ikke -vi har passeret målstregen 
       lapTimeInFrames = frameCount - lastTimeInFrames; //LAPTIME BEREGNES - frames nu - frames sidst
       lastTimeInFrames = frameCount;
+      labCompleated = true;
     }   
     lastGreenDetection = currentGreenDetection; //Husker om der var grønt sidst
     //count clockWiseRotationFrameCounter

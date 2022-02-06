@@ -1,6 +1,6 @@
 class CarController {
   //Forbinder - Sensorer & Hjerne & Bil
-  float varians             = 2; //hvor stor er variansen på de tilfældige vægte og bias
+  float varians             = 2/(generation); //hvor stor er variansen på de tilfældige vægte og bias
   Car bil                    = new Car();
   NeuralNetwork hjerne       = new NeuralNetwork(varians); 
   SensorSystem  sensorSystem = new SensorSystem();
@@ -18,6 +18,16 @@ class CarController {
     turnAngle = hjerne.getOutput(x1, x2, x3);    
     //4.)bilen drejes
     bil.turnCar(turnAngle);
+    
+    //if(sensorSystem.whiteSensorFrameCount > 30){
+    //  carSystem.CarControllerList.remove(this);
+    //}
+    
+    if(sensorSystem.labCompleated){
+      bedstweights = hjerne.weights;
+      nextGen();
+    }
+    
   }
   
   void display(){
