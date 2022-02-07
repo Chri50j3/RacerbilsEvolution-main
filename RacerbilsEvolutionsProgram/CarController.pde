@@ -4,7 +4,7 @@ class CarController {
   Car bil                    = new Car();
   NeuralNetwork hjerne       = new NeuralNetwork(varians); 
   SensorSystem  sensorSystem = new SensorSystem();
-      
+
   void update() {
     //1.)opdtarer bil 
     bil.update();
@@ -18,19 +18,22 @@ class CarController {
     turnAngle = hjerne.getOutput(x1, x2, x3);    
     //4.)bilen drejes
     bil.turnCar(turnAngle);
-    
-    //if(sensorSystem.whiteSensorFrameCount > 30){
-    //  carSystem.CarControllerList.remove(this);
-    //}
-    
-    if(sensorSystem.labCompleated){
-      bedstweights = hjerne.weights;
+
+    if (sensorSystem.whiteSensorFrameCount > 1) {
+      carSystem.CarControllerList.remove(this);
+    }
+
+    if (sensorSystem.labCompleated) {
+      if (BedstLap > sensorSystem.lapTimeInFrames) {
+        bedstweights = hjerne.weights;
+        bedstbiases = hjerne.biases;
+        BedstLap = sensorSystem.lapTimeInFrames;
+      }
       nextGen();
     }
-    
   }
-  
-  void display(){
+
+  void display() {
     bil.displayCar();
     sensorSystem.displaySensors();
   }

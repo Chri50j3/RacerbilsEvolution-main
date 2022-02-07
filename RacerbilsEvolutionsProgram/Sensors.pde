@@ -27,7 +27,7 @@ class SensorSystem {
 
   //lapTime calculation
   boolean lastGreenDetection;
-  int     lastTimeInFrames   = 0;
+  int     lastTimeInFrames   = frameCount;
   int     lapTimeInFrames       = 10000;
 
   void displaySensors() {
@@ -52,7 +52,7 @@ class SensorSystem {
     if (whiteSensorFrameCount>0) {
       fill(whiteSensorFrameCount*10, 0, 0);
     } else {
-      fill(0, clockWiseRotationFrameCounter, 0);
+      fill(5, clockWiseRotationFrameCounter, 5);
     }
     ellipse(anchorPos.x, anchorPos.y, 10, 10);
   }

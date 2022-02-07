@@ -1,7 +1,10 @@
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
 int       populationSize  = 100;    
-float[]   bedstweights = {0,0,0,0,0,0,0,0};
-float       generation = 1;
+float[]   bedstweights = {0, 0, 0, 0, 0, 0, 0, 0};
+float[]   bedstbiases = {0, 0, 0};
+float     generation = 1;
+int       BedstLap = 1111;
+int       resetCounter;
 
 //CarSystem: Indholder en population af "controllere" 
 CarSystem carSystem       = new CarSystem(populationSize);
@@ -16,26 +19,20 @@ void setup() {
 
 void draw() {
   background(255);
-  image(trackImage,0,80);  
+  image(trackImage, 0, 80);  
 
   carSystem.updateAndDisplay();
-  
-  //TESTKODE: Frastortering af dårlige biler, for hver gang der går 200 frame - f.eks. dem der kører uden for banen
-  /* if (frameCount%200==0) {
-      println("FJERN DEM DER KØRER UDENFOR BANEN frameCount: " + frameCount);
-      for (int i = carSystem.CarControllerList.size()-1 ; i >= 0;  i--) {
-        SensorSystem s = carSystem.CarControllerList.get(i).sensorSystem;
-        if(s.whiteSensorFrameCount > 0){
-          carSystem.CarControllerList.remove(carSystem.CarControllerList.get(i));
-         }
-      }
-    }*/
-    //
+
+  fill(0);
+  text("Bedst laptime: " + BedstLap, 20, 20);
+
+  if (resetCounter < frameCount-500) {
+    nextGen();
+  }
 }
 
-void nextGen(){
-  generation*=1.1;
-  
+void nextGen() {
+  generation*=1.05;
+  resetCounter = frameCount;
   carSystem = new CarSystem(populationSize);
-  
 }
