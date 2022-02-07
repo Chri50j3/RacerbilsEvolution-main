@@ -1,8 +1,9 @@
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
-int       populationSize  = 100;    
+int       populationSize  = 200;    
 float[]   bedstweights = {0, 0, 0, 0, 0, 0, 0, 0};
 float[]   bedstbiases = {0, 0, 0};
-float     generation = 1;
+float     margen = 1;
+int       generation;
 int       BedstLap = 1111;
 int       resetCounter;
 
@@ -25,6 +26,8 @@ void draw() {
 
   fill(0);
   text("Bedst laptime: " + BedstLap, 20, 20);
+  text("Generation: " + generation, 20, 30);
+
 
   if (resetCounter < frameCount-500) {
     nextGen();
@@ -32,7 +35,8 @@ void draw() {
 }
 
 void nextGen() {
-  generation*=1.05;
+  generation++;
+  margen*=1.05;
   resetCounter = frameCount;
   carSystem = new CarSystem(populationSize);
 }
