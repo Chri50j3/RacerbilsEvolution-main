@@ -2,8 +2,7 @@
 int       populationSize  = 200;    
 float[]   bedstweights = {0, 0, 0, 0, 0, 0, 0, 0};
 float[]   bedstbiases = {0, 0, 0};
-float     margen = 1;
-int       generation;
+float     generation;
 int       BedstLap = 1111;
 int       resetCounter;
 
@@ -36,7 +35,6 @@ void draw() {
 
 void nextGen() {
   generation++;
-  margen*=1.05;
   resetCounter = frameCount;
   carSystem = new CarSystem(populationSize);
 }
