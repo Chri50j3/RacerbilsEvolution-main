@@ -6,10 +6,11 @@ class NeuralNetwork {
   float[] biases = {0,0,0};//new float[3];
   
   NeuralNetwork(float varians){
-    for(int i=0; i < weights.length -1; i++){
+    
+    for(int i=0; i < weights.length ; i++){
       weights[i] = bedstweights[i]+random(-varians,varians);
     }
-    for(int i=0; i < biases.length -1; i++){
+    for(int i=0; i < biases.length ; i++){
       biases[i] = bedstbiases[i]+random(-varians,varians);
     }    
   }
