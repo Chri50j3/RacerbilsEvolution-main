@@ -6,6 +6,11 @@ float     generation = 1;
 int       BedstLap = 1111;
 int       resetCounter;
 
+boolean letThemRace;
+
+//int x=60, y=232;
+int x=360, y=517;
+
 //CarSystem: Indholder en population af "controllere" 
 CarSystem carSystem       = new CarSystem(populationSize);
 
@@ -13,7 +18,7 @@ CarSystem carSystem       = new CarSystem(populationSize);
 PImage    trackImage;
 
 void setup() {
-  size(500, 600);
+  size(900, 600);
   trackImage = loadImage("track.png");
 }
 
@@ -25,7 +30,7 @@ void draw() {
 
   fill(0);
   text("Bedst laptime: " + BedstLap, 20, 20);
-  text("Generation: " + generation, 20, 30);
+  text("Generation: " + int(generation), 20, 30);
 
   if (resetCounter < frameCount-500) {
     nextGen();
@@ -33,7 +38,15 @@ void draw() {
 }
 
 void nextGen() {
-  generation++;
-  resetCounter = frameCount;
-  carSystem = new CarSystem(populationSize);
+  if(!letThemRace){
+    generation++;
+    resetCounter = frameCount;
+    carSystem = new CarSystem(populationSize);
+  }
+}
+
+void keyPressed(){
+  if(key == 'r'){
+    letThemRace = true;
+  }
 }
